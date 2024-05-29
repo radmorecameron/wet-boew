@@ -124,6 +124,7 @@ var componentName = "wb-lbx",
 				oClose: i18n( "overlay-close" ),
 				tClose: i18n( "overlay-close" ) + i18n( "space" ) + i18n( "esc-key" ),
 				tLoading: i18n( "load" ),
+				closeMarkup: "<button title='%title%' type='button' class='mfp-close'>x</button>",
 				gallery: {
 					tPrev: i18n( "prv-l" ),
 					tNext: i18n( "nxt-r" ),

@@ -124,7 +124,9 @@ var componentName = "wb-lbx",
 				oClose: i18n( "overlay-close" ),
 				tClose: i18n( "overlay-close" ) + i18n( "space" ) + i18n( "esc-key" ),
 				tLoading: i18n( "load" ),
-				closeMarkup: "<button title='%title%' type='button' class='mfp-close'>x</button>",
+
+				// exclude 'times' from screen reader, move title to aria-hidden span
+				closeMarkup: "<button type='button' class='mfp-close'><span aria-hidden='true' title='%title%'>&times;</span></button>",
 				gallery: {
 					tPrev: i18n( "prv-l" ),
 					tNext: i18n( "nxt-r" ),
@@ -158,7 +160,7 @@ var componentName = "wb-lbx",
 					$document.find( modalHideSelector ).attr( "aria-hidden", "true" );
 					for ( i = 0; i !== len; i += 1 ) {
 						button = $buttons[ i ];
-						button.innerHTML += "<span class='wb-inv'> " + button.title + "</span>";
+						button.innerHTML += "<span class='wb-inv'> " + $( button ).find( "span" )[ 0 ].title + "</span>";
 					}
 
 					if ( $item.type === "image" ) {
@@ -295,9 +297,8 @@ var componentName = "wb-lbx",
 					footer.setAttribute( "class", "modal-footer" );
 				}
 
-				overlayCloseFtr = "<button type='button' class='btn btn-sm btn-primary pull-left " + closeClassFtr +
-					"' title='" + spanTextFtr + "'>" +
-					closeTextFtr +
+				overlayCloseFtr = "<button type='button' class='btn btn-sm btn-primary pull-left " + closeClassFtr + "'>" +
+					"<span aria-hidden='true'" + "' title='" + spanTextFtr + "'>" + closeTextFtr + "</span>" +
 					"<span class='wb-inv'>" + spanTextFtr + "</span></button>";
 
 				$( footer ).append( overlayCloseFtr );
